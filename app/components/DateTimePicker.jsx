@@ -7,7 +7,7 @@ import { component as el, header, table } from '../styles';
 
 moment.locale('fr');
 
-export default class DatepTimePicker extends Component {
+export default class DateTimePicker extends Component {
 
   static propTypes = {}
 

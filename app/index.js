@@ -1,1 +1,1 @@
-import DatepTimePicker from './components/DatepTimePicker';
+export DateTimePicker from './components/DateTimePicker.jsx';

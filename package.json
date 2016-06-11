@@ -4,6 +4,8 @@
   "description": "date and time picker build with react and moment.",
   "main": "index.js",
   "scripts": {
+    "start": "webpack --progress --colors --watch",
+    "build": "webpack --progress --colors --display-error-details",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,7 +24,12 @@
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
-    "eslint": "^2.11.1"
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^2.11.1",
+    "webpack": "^1.13.1"
   }
 }

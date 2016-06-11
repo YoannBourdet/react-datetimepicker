@@ -1,9 +1,8 @@
-import * from './colors';
-
+import { grey } from './colors';
 
 export const component =  {
   width: '350px',
-  border: '1px solid grey',
+  border: `1px solid ${grey}`,
 };
 
 export const header = {
