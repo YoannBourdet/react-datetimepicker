@@ -3,7 +3,9 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
-import { component as el, header } from '../styles';
+import DayCell from './DayCell';
+
+import { component as el, header, tableCell } from '../styles';
 
 moment.locale('fr');
 
@@ -22,7 +24,7 @@ export default class DateTimePicker extends Component {
   state = {
     date: moment(this.props.defaultValue),
     selected: moment(this.props.defaultValue),
-    rollover: false,
+    cellhover: false,
   }
 
   partitionArray(array, length) {
@@ -84,38 +86,24 @@ export default class DateTimePicker extends Component {
 
   renderEmptyCell(key) {
     return (
-      <div
+      <span
         key={key}
-        style={{
-          display: 'table-cell',
-          textAlign: 'center',
-          width: '50px',
-          height: '50px',
-          verticalAlign: 'middle',
-        }}
+        style={tableCell}
       />
     );
   }
 
   renderFullCell(day, key) {
-    const date = day.date();
-    // const selected = this.diffBetweenDays(this.state.selected, day);
+    const isSelected = this.diffBetweenDays(this.state.selected, day);
     // const isToday = this.props.today === date;
+
     return (
-      <div
+      <DayCell
+        day={day}
+        isSelected={isSelected}
         key={key}
-        onClick={this.selectedDay.bind(this, day)}
-        style={{
-          display: 'table-cell',
-          textAlign: 'center',
-          width: '50px',
-          height: '50px',
-          verticalAlign: 'middle',
-          cursor: 'pointer',
-        }}
-      >
-        <span>{date}</span>
-      </div>
+        onRequest={this.selectedDay.bind(this, day)}
+      />
     );
   }
 
@@ -164,15 +152,11 @@ export default class DateTimePicker extends Component {
 
   renderHeader() {
     const { date } = this.state;
-    const { btn } = header;
+    const { btn, main } = header;
 
     return (
       <div
-        style={{
-          width: '100%',
-          height: '200px',
-          backgroundColor: 'green',
-        }}
+        style={main}
       >
         <p
           className="year"

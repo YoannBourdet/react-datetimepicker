@@ -94,6 +94,10 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
+	var _DayCell = __webpack_require__(8);
+	
+	var _DayCell2 = _interopRequireDefault(_DayCell);
+	
 	var _styles = __webpack_require__(5);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -123,7 +127,7 @@
 	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DateTimePicker)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
 	      date: (0, _moment2.default)(_this.props.defaultValue),
 	      selected: (0, _moment2.default)(_this.props.defaultValue),
-	      rollover: false
+	      cellhover: false
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
@@ -196,43 +200,23 @@
 	  }, {
 	    key: 'renderEmptyCell',
 	    value: function renderEmptyCell(key) {
-	      return _react2.default.createElement('div', {
+	      return _react2.default.createElement('span', {
 	        key: key,
-	        style: {
-	          display: 'table-cell',
-	          textAlign: 'center',
-	          width: '50px',
-	          height: '50px',
-	          verticalAlign: 'middle'
-	        }
+	        style: _styles.tableCell
 	      });
 	    }
 	  }, {
 	    key: 'renderFullCell',
 	    value: function renderFullCell(day, key) {
-	      var date = day.date();
-	      // const selected = this.diffBetweenDays(this.state.selected, day);
+	      var isSelected = this.diffBetweenDays(this.state.selected, day);
 	      // const isToday = this.props.today === date;
-	      return _react2.default.createElement(
-	        'div',
-	        {
-	          key: key,
-	          onClick: this.selectedDay.bind(this, day),
-	          style: {
-	            display: 'table-cell',
-	            textAlign: 'center',
-	            width: '50px',
-	            height: '50px',
-	            verticalAlign: 'middle',
-	            cursor: 'pointer'
-	          }
-	        },
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          date
-	        )
-	      );
+	
+	      return _react2.default.createElement(_DayCell2.default, {
+	        day: day,
+	        isSelected: isSelected,
+	        key: key,
+	        onRequest: this.selectedDay.bind(this, day)
+	      });
 	    }
 	  }, {
 	    key: 'selectedDay',
@@ -288,16 +272,13 @@
 	    value: function renderHeader() {
 	      var date = this.state.date;
 	      var btn = _styles.header.btn;
+	      var main = _styles.header.main;
 	
 	
 	      return _react2.default.createElement(
 	        'div',
 	        {
-	          style: {
-	            width: '100%',
-	            height: '200px',
-	            backgroundColor: 'green'
-	          }
+	          style: main
 	        },
 	        _react2.default.createElement(
 	          'p',
@@ -410,7 +391,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.table = exports.header = exports.component = undefined;
+	exports.tableCellBtnActive = exports.tableCellBtn = exports.tableCell = exports.header = exports.component = undefined;
 	
 	var _colors = __webpack_require__(7);
 	
@@ -419,7 +400,14 @@
 	  border: '1px solid ' + _colors.grey
 	};
 	
+	/* Header */
 	var header = exports.header = {
+	  main: {
+	    position: 'relative',
+	    width: '100%',
+	    height: '200px',
+	    backgroundColor: '' + _colors.green
+	  },
 	  btn: {
 	    display: 'block',
 	    position: 'absolute',
@@ -434,12 +422,23 @@
 	  }
 	};
 	
-	var table = exports.table = {
-	  cell: {
-	    empty: {},
-	    full: {}
-	  }
+	/* Table */
+	var tableCell = exports.tableCell = {
+	  display: 'table-cell',
+	  textAlign: 'center',
+	  width: '50px',
+	  height: '50px',
+	  verticalAlign: 'middle'
 	};
+	
+	var tableCellBtn = exports.tableCellBtn = Object.assign({}, tableCell, {
+	  border: 'none',
+	  cursor: 'pointer'
+	});
+	
+	var tableCellBtnActive = exports.tableCellBtnActive = Object.assign({}, tableCellBtn, {
+	  backgroundColor: 'red'
+	});
 
 /***/ },
 /* 7 */
@@ -453,6 +452,104 @@
 	var white = exports.white = '#fff';
 	var black = exports.black = '#000';
 	var grey = exports.grey = '#e6e6e6';
+	var green = exports.green = 'green';
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _styles = __webpack_require__(5);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DayCell = function (_Component) {
+	  _inherits(DayCell, _Component);
+	
+	  function DayCell() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, DayCell);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DayCell)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	      cellhover: false
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(DayCell, [{
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      var _props = this.props;
+	      var day = _props.day;
+	      var onRequest = _props.onRequest;
+	
+	      if (onRequest) {
+	        onRequest(day);
+	      }
+	    }
+	  }, {
+	    key: 'handleHoverCell',
+	    value: function handleHoverCell(state) {
+	      this.setState({ cellhover: state });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props2 = this.props;
+	      var isSelected = _props2.isSelected;
+	      var day = _props2.day;
+	
+	      var style = !this.state.cellhover && !isSelected ? _styles.tableCellBtn : _styles.tableCellBtnActive;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        {
+	          onClick: this.handleClick.bind(this),
+	          onMouseEnter: this.handleHoverCell.bind(this, true),
+	          onMouseLeave: this.handleHoverCell.bind(this, false),
+	          style: style
+	        },
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          day.date()
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return DayCell;
+	}(_react.Component);
+	
+	DayCell.propTypes = {
+	  isSelected: _react.PropTypes.bool.isRequired,
+	  day: _react.PropTypes.object.isRequired,
+	  onRequest: _react.PropTypes.func.isRequired
+	};
+	exports.default = DayCell;
 
 /***/ }
 /******/ ]);
