@@ -1,6 +1,6 @@
 import { grey } from './colors';
 
-export const component =  {
+export const component = {
   width: '350px',
   border: `1px solid ${grey}`,
 };
@@ -27,6 +27,6 @@ export const table = {
     },
     full: {
 
-    }
+    },
   },
 };

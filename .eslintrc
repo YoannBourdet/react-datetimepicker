@@ -94,7 +94,6 @@
     "react/no-string-refs": 0,
     "react/prefer-stateless-function": 0,
     "react/sort-prop-types": 0,
-    "react/prop-types": 0,
     "react/jsx-handler-names": 0,
     "react/no-bind": 0,
     "react/jsx-no-literals": 0,
@@ -295,4 +294,3 @@
     "react/jsx-uses-vars": 2,
   }
 }
-

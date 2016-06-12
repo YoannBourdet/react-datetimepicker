@@ -1,15 +1,18 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 
-import { component as el, header, table } from '../styles';
+import { component as el, header } from '../styles';
 
 moment.locale('fr');
 
 export default class DateTimePicker extends Component {
 
-  static propTypes = {}
+  static propTypes = {
+    defaultValue: PropTypes.instanceOf(Date),
+    today: PropTypes.number,
+  }
 
   static defaultProps = {
     defaultValue: new Date(),
