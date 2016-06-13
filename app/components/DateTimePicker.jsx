@@ -14,17 +14,22 @@ export default class DateTimePicker extends Component {
   static propTypes = {
     defaultValue: PropTypes.instanceOf(Date),
     today: PropTypes.number,
+    visibility: PropTypes.bool,
   }
 
   static defaultProps = {
     defaultValue: new Date(),
     today: moment(new Date()).date(),
+    visibility: true,
   };
 
-  state = {
-    date: moment(this.props.defaultValue),
-    selected: moment(this.props.defaultValue),
-    cellhover: false,
+  constructor() {
+    super();
+    this.state = {
+      date: moment(this.props.defaultValue),
+      selected: moment(this.props.defaultValue),
+      visibility: this.props.visibility,
+    };
   }
 
   partitionArray(array, length) {
