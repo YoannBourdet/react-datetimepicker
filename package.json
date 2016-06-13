@@ -1,10 +1,9 @@
 {
-  "name": "y",
+  "name": "React-Datetimepicker",
   "version": "1.0.0",
   "description": "date and time picker build with react and moment.",
-  "main": "index.js",
   "scripts": {
-    "start": "webpack --progress --colors --watch",
+    "start": "webpack-dev-server --progress --colors --content-base example/ --hot",
     "build": "webpack --progress --colors --display-error-details",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,6 +34,8 @@
     "eslint": "^2.11.1",
     "eslint-plugin-react": "^5.1.1",
     "path": "^0.12.7",
-    "webpack": "^1.13.1"
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }
