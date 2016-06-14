@@ -13,7 +13,7 @@ export default class InputDateTimePicker extends Component {
   }
 
   handleFocus() {
-    console.log('okokkokkos');
+    console.log('handleFocus');
   }
 
   render() {

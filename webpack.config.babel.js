@@ -10,9 +10,9 @@ module.exports = {
     './example/js/app.js',
   ],
   output: {
-    path: path.join(__dirname, '/example/js/bundle/'),
-    filename: 'DateTimePicker.js',
-    publicPath: '/static/',
+    path: path.join(__dirname, '/example/js/'),
+    filename: 'bundle.js',
+    publicPath: '/assets/',
   },
   module: {
     loaders: [{
@@ -30,11 +30,6 @@ module.exports = {
       DateTimePicker: path.join(__dirname, '/app/components/DateTimePicker'),
       InputDateTimePicker: path.join(__dirname, '/app/components/InputDateTimePicker'),
     },
-  },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-    'moment': 'moment',
   },
   devtool: 'source-map',
 };
