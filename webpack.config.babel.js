@@ -1,5 +1,4 @@
 /* eslint quote-props: 0 */
-import webpack from 'webpack';
 import path from 'path';
 
 module.exports = {
@@ -21,9 +20,6 @@ module.exports = {
       loaders: ['react-hot', 'babel'],
     }],
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {

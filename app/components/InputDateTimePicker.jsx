@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import DateTimePicker from 'DateTimePicker';
 
 export default class InputDateTimePicker extends Component {
 
@@ -12,18 +13,34 @@ export default class InputDateTimePicker extends Component {
     placeholder: 'choose your Date',
   }
 
-  handleFocus() {
-    console.log('handleFocus');
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayPicker : false,
+    };
+  }
+
+  displayPicker(isVisible) {
+    this.setState({ displayPicker: isVisible });
   }
 
   render() {
     const { placeholder } = this.props;
+    const { displayPicker } = this.state;
+
     return (
-      <input
-        onFocus={this.handleFocus.bind(this)}
-        placeholder={placeholder}
-        type="text"
-      />
+      <div>
+        <input
+          onFocus={this.displayPicker.bind(this, true)}
+          placeholder={placeholder}
+          ref="input"
+          type="text"
+        />
+        <DateTimePicker
+          onRequest={this.displayPicker.bind(this)}
+          visibility={displayPicker}
+        />
+      </div>
     );
   }
 }

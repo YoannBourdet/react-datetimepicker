@@ -13,22 +13,22 @@ export default class DateTimePicker extends Component {
 
   static propTypes = {
     defaultValue: PropTypes.instanceOf(Date),
-    today: PropTypes.number,
+    showToday: PropTypes.bool,
     visibility: PropTypes.bool,
+    onRequest: PropTypes.func,
   }
 
   static defaultProps = {
     defaultValue: new Date(),
-    today: moment(new Date()).date(),
-    visibility: true,
+    showToday: true,
+    visibility: false,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       date: moment(this.props.defaultValue),
       selected: moment(this.props.defaultValue),
-      visibility: this.props.visibility,
     };
   }
 
@@ -100,7 +100,7 @@ export default class DateTimePicker extends Component {
 
   renderFullCell(day, key) {
     const isSelected = this.diffBetweenDays(this.state.selected, day);
-    // const isToday = this.props.today === date;
+    // const isToday = getTodayDate() ;
 
     return (
       <DayCell
@@ -110,14 +110,6 @@ export default class DateTimePicker extends Component {
         onRequest={this.selectedDay.bind(this, day)}
       />
     );
-  }
-
-  selectedDay(day) {
-    this.setState({ selected:  moment(day) });
-  }
-
-  diffBetweenDays(day1, day2) {
-    return !day1.startOf('date').diff(day2.startOf('date'));
   }
 
   renderPickerDays() {
@@ -153,6 +145,23 @@ export default class DateTimePicker extends Component {
 
   manipulate(action, number, time) {
     this.setState({ date : moment(this.state.date)[action](1, time) });
+  }
+
+  selectedDay(day) {
+    const { onRequest } = this.props;
+    this.setState({ selected: moment(day) });
+    if (onRequest) {
+      onRequest(false);
+    }
+  }
+
+  diffBetweenDays(day1, day2) {
+    return !day1.startOf('date').diff(day2.startOf('date'));
+  }
+
+  getTodayDate() {
+    const { defaultValue, showToday } = this.props;
+    return !showToday ? null : moment(defaultValue).date();
   }
 
   renderHeader() {
@@ -202,7 +211,9 @@ export default class DateTimePicker extends Component {
   }
 
   render() {
-    return (
+    const { visibility } = this.props;
+
+    return !visibility ? null : (
       <div
         className="datepicker"
         style={el}
