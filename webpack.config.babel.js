@@ -24,7 +24,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
     alias: {
       DateTimePicker: path.join(__dirname, '/app/components/DateTimePicker'),
-      InputDateTimePicker: path.join(__dirname, '/app/components/InputDateTimePicker'),
     },
   },
   devtool: 'source-map',

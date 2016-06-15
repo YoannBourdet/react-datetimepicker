@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import InputDateTimePicker from 'InputDateTimePicker';
+import DateTimePicker from 'DateTimePicker';
 
 ReactDOM.render(
-  <InputDateTimePicker />,
+  <DateTimePicker />,
   document.getElementById('main')
 );
