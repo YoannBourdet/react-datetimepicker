@@ -6,7 +6,8 @@ import onClickOutside from 'react-onclickoutside';
 import Calendar from './Calendar';
 import Input from './Input';
 
-const DateTimePicker = class DateTimePicker extends Component {
+@onClickOutside
+export default class DateTimePicker extends Component {
 
   static propTypes = {
     placeholder: PropTypes.string,
@@ -48,6 +49,4 @@ const DateTimePicker = class DateTimePicker extends Component {
       </div>
     );
   }
-};
-
-export default onClickOutside(DateTimePicker);
+}
