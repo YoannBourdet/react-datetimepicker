@@ -1,12 +1,14 @@
 /*
- * OnclickoutSide Decorator
+ * OnClickOutSide Decorator
  */
 'use strict';
 
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
-export default (WrapedComponent) => (
+import errors from './errors';
+
+export default (WrappedComponent) => (
   class onClickOutside extends Component {
     componentDidMount() {
       window.addEventListener(
@@ -22,31 +24,35 @@ export default (WrapedComponent) => (
       );
     }
 
-    getReactRef() {
-      return this.refs.componentTarget;
+    /* Get wrapped Component Reference */
+    getWCR() {
+      return this.refs.wcr;
     }
 
+    /*
+     * Handle the 'click outside' event.
+     * Get the ref of the wrapped component and
+     * call this handleClickOutside() function.
+     */
     handleClickOutside(e) {
       e.stopPropagation();
 
-      const ref = this.getReactRef();
+      const ref = this.getWCR();
 
       if (typeof ref.handleClickOutside !== 'function') {
-        throw new Error(
-          'handleClickOutside() must be a function for processing outside click events.'
-        );
+        throw new Error(errors.notFunction);
       }
 
       const component = findDOMNode(ref);
 
-      if (!component.contains(e.target)) {
+      if (component && !component.contains(e.target)) {
         ref.handleClickOutside();
       }
     }
 
     render() {
       return (
-        <WrapedComponent ref="componentTarget"/>
+        <WrappedComponent {...this.props} ref="wcr"/>
       );
     }
   }

@@ -45,9 +45,11 @@ export default class DateTimePicker extends Component {
         <Input
           onFocus={this.displayPicker.bind(this)}
           placeholder={placeholder}
+          ref="input"
         />
         <Calendar
           onRequest={this.displayPicker.bind(this)}
+          ref="calendar"
           visibility={displayPicker}
         />
       </div>
