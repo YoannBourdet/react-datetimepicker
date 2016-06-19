@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import DayCell from './DayCell';
 
-import { component as el, header, tableCell } from '../styles';
+import { calendar, header, tableCell } from '../styles';
 
 moment.locale('fr');
 
@@ -220,7 +220,7 @@ export default class Calendar extends Component {
     return !visibility ? null : (
       <div
         className="datepicker"
-        style={el}
+        style={calendar}
       >
         {this.renderHeader()}
         {this.renderPickerDays()}
