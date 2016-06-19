@@ -1,10 +1,12 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import onClickOutside from 'react-onclickoutside';
+import onClickOutside from '../js/onClickOutside';
 
 import Calendar from './Calendar';
 import Input from './Input';
+
+import { dtm } from '../styles';
 
 @onClickOutside
 export default class DateTimePicker extends Component {
@@ -37,7 +39,9 @@ export default class DateTimePicker extends Component {
     const { displayPicker } = this.state;
 
     return (
-      <div>
+      <div
+        style={dtm}
+      >
         <Input
           onFocus={this.displayPicker.bind(this)}
           placeholder={placeholder}

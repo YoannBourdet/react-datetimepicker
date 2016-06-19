@@ -1,6 +1,12 @@
 import { green, grey } from './colors';
 
-export const component = {
+/* Date Time Picker */
+export const dtm = {
+  display: 'inline-block',
+};
+
+/* Calendar */
+export const calendar = {
   width: '350px',
   border: `1px solid ${grey}`,
 };

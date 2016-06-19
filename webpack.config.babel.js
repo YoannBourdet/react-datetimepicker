@@ -26,5 +26,4 @@ module.exports = {
       DateTimePicker: path.join(__dirname, '/app/components/DateTimePicker'),
     },
   },
-  devtool: 'source-map',
 };
