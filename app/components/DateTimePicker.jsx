@@ -41,6 +41,11 @@ export default class DateTimePicker extends Component {
     });
   }
 
+  getValue(e) {
+    e.preventDefault();
+    return this.refs.calendar.getValue();
+  }
+
   render() {
     const { placeholder } = this.props;
     const { displayPicker, selectedDay } = this.state;

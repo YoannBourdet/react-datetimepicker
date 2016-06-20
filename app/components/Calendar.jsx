@@ -170,6 +170,16 @@ export default class Calendar extends Component {
     return !showToday ? null : moment(defaultValue).date();
   }
 
+  getValue() {
+    const { format } = this.props;
+    const { selected } = this.state;
+    return {
+      day: selected,
+      formatted: moment(selected).format(format),
+      iso: selected.toJSON(),
+    };
+  }
+
   renderHeader() {
     const { date } = this.state;
     const { btn, main } = header;
