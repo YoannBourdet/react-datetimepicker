@@ -16,10 +16,12 @@ export default class Calendar extends Component {
     showToday: PropTypes.bool,
     visibility: PropTypes.bool,
     onRequest: PropTypes.func,
+    format: PropTypes.string,
   }
 
   static defaultProps = {
     defaultValue: new Date(),
+    format: 'DD/MM/YYYY',
     showToday: true,
     visibility: false,
   };
@@ -147,16 +149,16 @@ export default class Calendar extends Component {
     this.setState({ date : moment(this.state.date)[action](1, time) });
   }
 
-  hideCalendar() {
-    const { onRequest } = this.props;
-    if (onRequest) {
-      onRequest(false);
-    }
-  }
-
   selectedDay(day) {
-    this.setState({ selected: moment(day) });
-    this.hideCalendar();
+    const { format, onRequest } = this.props;
+    const formattedDay = moment(day).format(format);
+    const isOpen = false;
+
+    this.setState({ selected: moment(day) }, () => {
+      if (onRequest) {
+        onRequest(formattedDay, isOpen);
+      }
+    });
   }
 
   diffBetweenDays(day1, day2) {

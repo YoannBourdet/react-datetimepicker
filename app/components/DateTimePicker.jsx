@@ -23,6 +23,7 @@ export default class DateTimePicker extends Component {
     super(props);
     this.state = {
       displayPicker : false,
+      selectedDay: '',
     };
   }
 
@@ -34,9 +35,15 @@ export default class DateTimePicker extends Component {
     this.displayPicker(false);
   }
 
+  updatePicker(day, isVisible) {
+    this.setState({ selectedDay: day }, () => {
+      this.displayPicker(isVisible);
+    });
+  }
+
   render() {
     const { placeholder } = this.props;
-    const { displayPicker } = this.state;
+    const { displayPicker, selectedDay } = this.state;
 
     return (
       <div
@@ -46,9 +53,10 @@ export default class DateTimePicker extends Component {
           onFocus={this.displayPicker.bind(this)}
           placeholder={placeholder}
           ref="input"
+          value={selectedDay}
         />
         <Calendar
-          onRequest={this.displayPicker.bind(this)}
+          onRequest={this.updatePicker.bind(this)}
           ref="calendar"
           visibility={displayPicker}
         />

@@ -6,6 +6,7 @@ export default class Input extends Component {
   static propTypes = {
     placeholder: PropTypes.string,
     onFocus: PropTypes.func,
+    value: PropTypes.string,
   }
 
   static defaultProps = {
@@ -20,13 +21,14 @@ export default class Input extends Component {
   }
 
   render() {
-    const { placeholder } = this.props;
+    const { placeholder, value } = this.props;
 
     return (
       <input
         onFocus={this.handleFocus.bind(this)}
         placeholder={placeholder}
         type="text"
+        value={value}
       />
     );
   }
