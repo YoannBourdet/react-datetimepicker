@@ -16,7 +16,7 @@ export default class DateTimePicker extends Component {
   }
 
   static defaultProps = {
-    placeholder: 'choose your Date',
+    placeholder: 'Choose your date',
   }
 
   constructor(props) {

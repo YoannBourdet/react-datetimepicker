@@ -1,14 +1,29 @@
-import { green, grey } from './colors';
+import {
+  active,
+  grey,
+  main,
+  white,
+} from './colors';
 
 /* Date Time Picker */
 export const dtm = {
   display: 'inline-block',
 };
 
+/* Input */
+
+export const input = {
+  padding: '5px',
+  outline: 'none',
+  borderRadius: '20px',
+  border: `1px solid ${grey}`,
+};
+
 /* Calendar */
 export const calendar = {
   width: '350px',
-  border: `1px solid ${grey}`,
+  color: white,
+  backgroundColor: main,
 };
 
 /* Header */
@@ -17,7 +32,6 @@ export const header = {
     position: 'relative',
     width: '100%',
     height: '200px',
-    backgroundColor: `${green}`,
   },
   btn : {
     display: 'block',
@@ -48,5 +62,5 @@ export const tableCellBtn = Object.assign({}, tableCell, {
 });
 
 export const tableCellBtnActive = Object.assign({}, tableCellBtn, {
-  backgroundColor: 'red',
+  backgroundColor: active,
 });
