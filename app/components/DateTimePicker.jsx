@@ -16,7 +16,7 @@ export default class DateTimePicker extends Component {
   }
 
   static defaultProps = {
-    placeholder: 'choose your Date',
+    placeholder: 'Choose your date',
   }
 
   constructor(props) {
@@ -39,6 +39,11 @@ export default class DateTimePicker extends Component {
     this.setState({ selectedDay: day }, () => {
       this.displayPicker(isVisible);
     });
+  }
+
+  getValue(e) {
+    e.preventDefault();
+    return this.refs.calendar.getValue();
   }
 
   render() {

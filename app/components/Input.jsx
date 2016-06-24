@@ -2,6 +2,8 @@
 
 import React, { Component, PropTypes } from 'react';
 
+import { input } from '../styles';
+
 export default class Input extends Component {
   static propTypes = {
     placeholder: PropTypes.string,
@@ -27,6 +29,7 @@ export default class Input extends Component {
       <input
         onFocus={this.handleFocus.bind(this)}
         placeholder={placeholder}
+        style={input}
         type="text"
         value={value}
       />
