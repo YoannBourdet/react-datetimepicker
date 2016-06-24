@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import DayCell from './DayCell';
 
-import { calendar, header, tableCell } from '../styles';
+import { calendar, header, monthdays, tableCell, weekdays } from '../styles';
 
 moment.locale('fr');
 
@@ -71,20 +71,17 @@ export default class Calendar extends Component {
 
   renderDaysCells() {
     const partitons = this.displayDaysPartition();
+    const { row, table } = monthdays;
     const cells = !partitons.length ? null :
       partitons.map((partition, i) => (
-        <div key={i} style={{ display: 'table-row' }}>
+        <div key={i} style={row}>
           {partition.map((day, j) => !day ? this.renderEmptyCell(j) : this.renderFullCell(day, j))}
         </div>
     ));
 
     return (
       <div
-        style={{
-          display: 'table',
-          width: '100%',
-          height: 'auto',
-        }}
+        style={table}
       >
         {cells}
       </div>
@@ -116,16 +113,11 @@ export default class Calendar extends Component {
 
   renderPickerDays() {
     const days = ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'];
+    const { cell, container } = weekdays;
     const cells = days.map((day, i) => (
       <span
         key={i}
-        style={{
-          display: 'table-cell',
-          textAlign: 'center',
-          width: '5px',
-          height: '50px',
-          verticalAlign: 'middle',
-        }}
+        style={cell}
       >
         {day}
       </span>
@@ -133,12 +125,7 @@ export default class Calendar extends Component {
 
     return (
       <div
-        style={{
-          display: 'table',
-          width: '100%',
-          height: 'auto',
-          borderBottom: '1px solid grey',
-        }}
+        style={container}
       >
         {cells}
       </div>
@@ -182,58 +169,56 @@ export default class Calendar extends Component {
 
   renderHeader() {
     const { date } = this.state;
-    const { btn, main } = header;
+    const { btn, container, paragraph } = header;
 
     return (
       <div
-        style={main}
+        style={container}
       >
         <p
-          className="year"
-          style={{
-            textAlign: 'center',
-          }}
+          style={paragraph}
         >
-          {date.format('YYYY')}
+          {date.format('MMMM')}, {date.format('YYYY')}
         </p>
 
-        <div className="month">
-          <p
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            {date.format('MMMM')}
-          </p>
-          <span
-            onClick={this.manipulate.bind(this, 'subtract', 1, 'months')}
-            style={Object.assign({}, btn, {
-              left: 0,
-            })}
-          >
-          -
-          </span>
-          <span
-            onClick={this.manipulate.bind(this, 'add', 1, 'months')}
-            style={Object.assign({}, btn, {
-              right: 0,
-            })}
-          >
-          +
-          </span>
-        </div>
+        <span
+          onClick={this.manipulate.bind(this, 'subtract', 1, 'months')}
+          style={Object.assign({}, btn, {
+            left: 0,
+          })}
+        >
+        -
+        </span>
+        <span
+          onClick={this.manipulate.bind(this, 'add', 1, 'months')}
+          style={Object.assign({}, btn, {
+            right: 0,
+          })}
+        >
+        +
+        </span>
       </div>
     );
   }
 
   render() {
     const { visibility } = this.props;
+    const { arrow, arrow: { svg }, container } = calendar;
 
     return !visibility ? null : (
       <div
-        className="datepicker"
-        style={calendar}
+        style={container}
       >
+        <span style={arrow}>
+          <svg
+            style={svg}
+            viewBox="0 0 386.257 386.257"
+            x="0px"
+            y="0px"
+          >
+            <polygon points="193.129,96.879 0,289.379 386.257,289.379 "/>
+          </svg>
+        </span>
         {this.renderHeader()}
         {this.renderPickerDays()}
         {this.renderDaysCells()}

@@ -1,6 +1,7 @@
 import {
   active,
   grey,
+  greyLight,
   main,
   white,
 } from './colors';
@@ -11,35 +12,52 @@ export const dtm = {
 };
 
 /* Input */
-
 export const input = {
-  padding: '5px',
+  padding: 5,
   outline: 'none',
-  borderRadius: '20px',
-  border: `1px solid ${grey}`,
+  borderRadius: 20,
+  border: `1px solid ${greyLight}`,
 };
 
 /* Calendar */
 export const calendar = {
-  width: '350px',
-  color: white,
-  backgroundColor: main,
+  container: {
+    position: 'relative',
+    width: 350,
+    color: white,
+    backgroundColor: main,
+    padding: '40px 20px 20px 20px',
+    marginTop: 15,
+  },
+  arrow: {
+    position: 'absolute',
+    top: -11,
+    left: 20,
+    width: 15,
+    display: 'inline-block',
+    svg: {
+      fill: main,
+    },
+  },
 };
 
 /* Header */
 export const header = {
-  main: {
+  container: {
     position: 'relative',
     width: '100%',
-    height: '200px',
+    height: 50,
+    textAlign: 'center',
   },
-  btn : {
+  paragraph: {
+    display: 'inline-block',
+  },
+  btn: {
     display: 'block',
     position: 'absolute',
     bottom: 0,
-    border: '1px solid #000',
-    width: '50px',
-    height: '50px',
+    width: 50,
+    height: 50,
     fontSize: '2em',
     textAlign: 'center',
     verticalAlign: 'middle',
@@ -47,12 +65,39 @@ export const header = {
   },
 };
 
+export const weekdays = {
+  container: {
+    display: 'table',
+    width: '100%',
+    height: 'auto',
+  },
+  cell: {
+    display: 'table-cell',
+    textAlign: 'center',
+    width: 5,
+    height: 50,
+    verticalAlign: 'middle',
+    color: grey,
+  },
+};
+
 /* Table */
+export const monthdays = {
+  table: {
+    display: 'table',
+    width: '100%',
+    height: 'auto',
+  },
+  row: {
+    display: 'table-row',
+  },
+};
+
 export const tableCell = {
   display: 'table-cell',
   textAlign: 'center',
-  width: '50px',
-  height: '50px',
+  width: 50,
+  height: 50,
   verticalAlign: 'middle',
 };
 
