@@ -1,5 +1,6 @@
 import {
   active,
+  black,
   grey,
   greyLight,
   main,
@@ -13,10 +14,12 @@ export const dtm = {
 
 /* Input */
 export const input = {
-  padding: 5,
   outline: 'none',
-  borderRadius: 20,
+  borderRadius: 30,
   border: `1px solid ${greyLight}`,
+  padding: 15,
+  minWidth: 200,
+  color: black,
 };
 
 /* Calendar */

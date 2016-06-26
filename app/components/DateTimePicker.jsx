@@ -22,8 +22,8 @@ export default class DateTimePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      updatedDate: { formatted: '' },
       displayPicker : false,
-      selectedDay: '',
     };
   }
 
@@ -31,12 +31,8 @@ export default class DateTimePicker extends Component {
     this.setState({ displayPicker: isVisible });
   }
 
-  handleClickOutside() {
-    this.displayPicker(false);
-  }
-
   updatePicker(day, isVisible) {
-    this.setState({ selectedDay: day }, () => {
+    this.setState({ updatedDate: day }, () => {
       this.displayPicker(isVisible);
     });
   }
@@ -46,23 +42,34 @@ export default class DateTimePicker extends Component {
     return this.refs.calendar.getValue();
   }
 
+  handleClickOutside() {
+    this.displayPicker(false);
+  }
+
+  handleInputChange(value) {
+    this.setState({ updatedDate : { formatted: value } },
+      () => this.forceUpdate());
+  }
+
   render() {
     const { placeholder } = this.props;
-    const { displayPicker, selectedDay } = this.state;
+    const { displayPicker, updatedDate: { day, formatted } } = this.state;
 
     return (
       <div
         style={dtm}
       >
         <Input
+          onChange={this.handleInputChange.bind(this)}
           onFocus={this.displayPicker.bind(this)}
           placeholder={placeholder}
           ref="input"
-          value={selectedDay}
+          value={formatted}
         />
         <Calendar
           onRequest={this.updatePicker.bind(this)}
           ref="calendar"
+          value={!day ? formatted : day}
           visibility={displayPicker}
         />
       </div>
