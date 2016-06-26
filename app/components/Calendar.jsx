@@ -169,7 +169,7 @@ export default class Calendar extends Component {
 
   renderHeader() {
     const { date } = this.state;
-    const { btn, container, paragraph } = header;
+    const { arrow, btn, container, paragraph } = header;
 
     return (
       <div
@@ -187,7 +187,14 @@ export default class Calendar extends Component {
             left: 0,
           })}
         >
-        -
+          <svg
+            style={arrow}
+            viewBox="0 0 408 408"
+          >
+            <polygon
+              points="408 178.5, 96.9 178.5, 239.7 35.7, 204 0, 0 204, 204 408, 239.7 372.3, 96.9 229.5, 408 229.5, 408 178.5"
+            />
+          </svg>
         </span>
         <span
           onClick={this.manipulate.bind(this, 'add', 1, 'months')}
@@ -195,7 +202,14 @@ export default class Calendar extends Component {
             right: 0,
           })}
         >
-        +
+          <svg
+            style={arrow}
+            viewBox="0 0 408 408"
+          >
+            <polygon
+              points="204 0, 168.3 35.7, 311.1 178.5, 0 178.5, 0 229.5, 311.1 229.5, 168.3 372.3, 204 408, 408 204"
+            />
+          </svg>
         </span>
       </div>
     );
@@ -209,16 +223,14 @@ export default class Calendar extends Component {
       <div
         style={container}
       >
-        <span style={arrow}>
-          <svg
-            style={svg}
-            viewBox="0 0 386.257 386.257"
-            x="0px"
-            y="0px"
-          >
-            <polygon points="193.129,96.879 0,289.379 386.257,289.379 "/>
-          </svg>
-        </span>
+        <svg
+          style={arrow}
+          viewBox="0 0 20 10"
+          x="0px"
+          y="0px"
+        >
+          <polygon points="10 0, 20 10, 0 10"/>
+        </svg>
         {this.renderHeader()}
         {this.renderPickerDays()}
         {this.renderDaysCells()}

@@ -31,13 +31,11 @@ export const calendar = {
   },
   arrow: {
     position: 'absolute',
-    top: -11,
+    top: -10,
     left: 20,
-    width: 15,
+    width: 20,
     display: 'inline-block',
-    svg: {
-      fill: main,
-    },
+    fill: main,
   },
 };
 
@@ -58,10 +56,17 @@ export const header = {
     bottom: 0,
     width: 50,
     height: 50,
-    fontSize: '2em',
+    fontSize: '1.6em',
+    lineHeight: '50px',
     textAlign: 'center',
     verticalAlign: 'middle',
     cursor: 'pointer',
+  },
+  arrow: {
+    display: 'inline-block',
+    fill: white,
+    width: 20,
+    height: 20,
   },
 };
 
