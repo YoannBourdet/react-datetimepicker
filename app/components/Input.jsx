@@ -6,13 +6,22 @@ import { input } from '../styles';
 
 export default class Input extends Component {
   static propTypes = {
-    placeholder: PropTypes.string,
+    onChange: PropTypes.func,
     onFocus: PropTypes.func,
+    placeholder: PropTypes.string,
     value: PropTypes.string,
   }
 
   static defaultProps = {
-    placeholder: 'choose your Date',
+    placeholder: 'Choose your date',
+  }
+
+  handleChange(e) {
+    const { onChange } = this.props;
+    const value = e.target.value;
+    if (onChange) {
+      onChange(value);
+    }
   }
 
   handleFocus() {
@@ -27,6 +36,7 @@ export default class Input extends Component {
 
     return (
       <input
+        onChange={this.handleChange.bind(this)}
         onFocus={this.handleFocus.bind(this)}
         placeholder={placeholder}
         style={input}

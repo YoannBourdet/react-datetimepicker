@@ -1,3 +1,4 @@
+/* eslint max-len: 0 */
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
@@ -12,11 +13,18 @@ moment.locale('fr');
 export default class Calendar extends Component {
 
   static propTypes = {
-    defaultValue: PropTypes.instanceOf(Date),
-    showToday: PropTypes.bool,
-    visibility: PropTypes.bool,
-    onRequest: PropTypes.func,
+    defaultValue: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.string,
+    ]),
     format: PropTypes.string,
+    onRequest: PropTypes.func,
+    showToday: PropTypes.bool,
+    value: PropTypes.oneOfType([
+      PropTypes.instanceOf(moment),
+      PropTypes.string,
+    ]),
+    visibility: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -32,6 +40,14 @@ export default class Calendar extends Component {
       date: moment(this.props.defaultValue),
       selected: moment(this.props.defaultValue),
     };
+  }
+
+  componentWillReceiveProps() {
+    const { value } = this.props;
+    const date = moment(value, this.props.format, true);
+    if (date.isValid()) {
+      this.setState({ date });
+    }
   }
 
   partitionArray(array, length) {
@@ -137,13 +153,12 @@ export default class Calendar extends Component {
   }
 
   selectedDay(day) {
-    const { format, onRequest } = this.props;
-    const formattedDay = moment(day).format(format);
+    const { onRequest } = this.props;
     const isOpen = false;
 
     this.setState({ selected: moment(day) }, () => {
       if (onRequest) {
-        onRequest(formattedDay, isOpen);
+        onRequest(this.getValue(), isOpen);
       }
     });
   }
